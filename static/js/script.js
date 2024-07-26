@@ -1,26 +1,22 @@
-document.getElementById('imageInput').addEventListener('change', function() {
-    const file = this.files[0];
-    if (file) {
-        const formData = new FormData();
-        formData.append('image', file);
+document.getElementById('predictButton').addEventListener('click', function() {
+    const imageInput = document.getElementById('imageInput');
+    const loading = document.getElementById('loading');
+    const result = document.getElementById('result');
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/predict', true);
-
-        xhr.upload.onprogress = function(e) {
-            document.getElementById('loader').style.display = 'block';
-        };
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                const response = JSON.parse(xhr.responseText);
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('result').style.display = 'block';
-                document.getElementById('result').textContent = `AI Probability: ${response.probability.toFixed(2)}`;
-                // You can add visualization of probability here
-            }
-        };
-
-        xhr.send(formData);
+    if (imageInput.files.length === 0) {
+        alert('Please upload an image.');
+        return;
     }
+
+    loading.style.display = 'block';
+    result.textContent = '';
+
+    // Simulate a loading and prediction process
+    setTimeout(() => {
+        loading.style.display = 'none';
+        // This is where you would normally handle the prediction logic
+        // For demonstration, we'll just randomly decide if the image is AI-generated or not
+        const isAIGenerated = Math.random() > 0.5;
+        result.textContent = isAIGenerated ? 'The image is AI generated.' : 'The image is not AI generated.';
+    }, 2000); // Simulate 2 seconds of loading time
 });
