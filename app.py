@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, jsonify
 from PIL import Image
 from transformers import AutoImageProcessor, AutoModelForImageClassification
 import torch
@@ -23,16 +23,17 @@ def predict(image_path):
 def index():
     if request.method == 'POST':
         if 'file' not in request.files:
-            return redirect(request.url)
+            return jsonify({'error': 'No file part'}), 400
         file = request.files['file']
         if file.filename == '':
-            return redirect(request.url)
+            return jsonify({'error': 'No selected file'}), 400
         if file:
-            file_path = os.path.join('static/uploads', file.filename)
+            filename = file.filename
+            file_path = os.path.join('static/uploads', filename)
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
             file.save(file_path)
             prediction = predict(file_path)
-            return render_template('result.html', prediction=prediction, image_path=file_path)
+            return jsonify({'prediction': prediction, 'image_path': 'uploads/' + filename})
     return render_template('index.html')
 
 if __name__ == "__main__":

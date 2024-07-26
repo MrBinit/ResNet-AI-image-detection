@@ -47,14 +47,6 @@ h1 {
     border-radius: 5px;
 }
 
-.result-section img {
-    max-width: 100%;
-    max-height: 300px;
-    margin-bottom: 20px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-}
-
 #predictButton {
     background-color: #007BFF;
     color: white;
@@ -105,14 +97,29 @@ h1 {
     color: #00aa00;
 }
 
-.back-button {
+#resultImage {
+    max-width: 100%;
+    max-height: 300px;
     margin-top: 20px;
-    text-decoration: none;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.try-again {
+    display: none;
+    margin-top: 20px;
     background-color: #007BFF;
     color: white;
     padding: 10px 20px;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
     transition: background-color 0.3s;
+}
+
+.try-again:hover {
+    background-color: #0056b3;
 }
 
 .back-button:hover {

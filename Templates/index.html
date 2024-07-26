@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1>AI Detector</h1>
-        <form method="post" enctype="multipart/form-data">
+        <form id="uploadForm">
             <div class="input-section">
                 <input type="file" name="file" id="imageInput" accept="image/*">
                 <img id="imagePreview" src="#" alt="Image Preview" style="display:none;">
@@ -19,6 +19,7 @@
         </form>
         <div id="loading" class="loading">Loading...</div>
         <div id="result" class="result"></div>
+        <button id="tryAgainButton" class="try-again" style="display:none;" onclick="window.location.reload();">Try Again</button>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
