@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Result</title>
+    <title>AI Detector Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Prediction Result: {{ prediction }}</h1>
-    <img src="{{ url_for('static', filename=image_path.split('static/')[1]) }}" alt="Uploaded Image">
-    <br><br>
-    <a href="/">Upload Another Image</a>
+    <div class="container">
+        <h1>AI Detector</h1>
+        <div class="result-section">
+            <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image">
+            <div id="result" class="result {{ 'ai-generated' if prediction == 'Fake' else 'not-ai-generated' }}">
+                {{ prediction }}
+            </div>
+            <a href="{{ url_for('index') }}" class="back-button">Try Another Image</a>
+        </div>
+    </div>
 </body>
 </html>

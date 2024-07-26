@@ -1,3 +1,20 @@
+document.getElementById('imageInput').addEventListener('change', function(event) {
+    const imagePreview = document.getElementById('imagePreview');
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        imagePreview.src = e.target.result;
+        imagePreview.style.display = 'block';
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        imagePreview.style.display = 'none';
+    }
+});
+
 document.getElementById('predictButton').addEventListener('click', function() {
     const imageInput = document.getElementById('imageInput');
     const loading = document.getElementById('loading');
@@ -10,13 +27,5 @@ document.getElementById('predictButton').addEventListener('click', function() {
 
     loading.style.display = 'block';
     result.textContent = '';
-
-    // Simulate a loading and prediction process
-    setTimeout(() => {
-        loading.style.display = 'none';
-        // This is where you would normally handle the prediction logic
-        // For demonstration, we'll just randomly decide if the image is AI-generated or not
-        const isAIGenerated = Math.random() > 0.5;
-        result.textContent = isAIGenerated ? 'The image is AI generated.' : 'The image is not AI generated.';
-    }, 2000); // Simulate 2 seconds of loading time
+    result.classList.remove('ai-generated', 'not-ai-generated');
 });

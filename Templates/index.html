@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Detector</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <h1>AI Detector</h1>
-        <div class="input-section">
-            <input type="file" id="imageInput" accept="image/*">
-            <button id="predictButton">Predict</button>
-        </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="input-section">
+                <input type="file" name="file" id="imageInput" accept="image/*">
+                <img id="imagePreview" src="#" alt="Image Preview" style="display:none;">
+                <button type="submit" id="predictButton">Predict</button>
+            </div>
+        </form>
         <div id="loading" class="loading">Loading...</div>
         <div id="result" class="result"></div>
     </div>
@@ -20,4 +24,3 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
-
